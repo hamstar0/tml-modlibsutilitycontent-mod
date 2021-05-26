@@ -6,9 +6,9 @@ using ModLibsUtilityContent.Tiles;
 
 namespace ModLibsUtilityContent {
 	/// @private
-	class ModHelpersItem : GlobalItem {
+	class ModLibsUCItem : GlobalItem {
 		public override void SetDefaults( Item item ) {
-//DataStore.Add( DebugHelpers.GetCurrentContext()+"_"+item.whoAmI+":"+item.type+"_A", 1 );
+//DataStore.Add( DebugLibraries.GetCurrentContext()+"_"+item.whoAmI+":"+item.type+"_A", 1 );
 			if( item.type == ItemID.Coal ) {
 				if( ModLibsUtilityContentConfig.Instance.CoalAsTile ) {
 					item.maxStack = 999;
@@ -27,7 +27,7 @@ namespace ModLibsUtilityContent {
 			}
 
 			base.SetDefaults( item );
-//DataStore.Add( DebugHelpers.GetCurrentContext()+"_"+item.whoAmI+":"+item.type+"_B", 1 );
+//DataStore.Add( DebugLibraries.GetCurrentContext()+"_"+item.whoAmI+":"+item.type+"_B", 1 );
 		}
 	}
 }

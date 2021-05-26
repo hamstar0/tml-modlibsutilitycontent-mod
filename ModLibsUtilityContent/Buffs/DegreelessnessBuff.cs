@@ -70,7 +70,7 @@ namespace ModLibsUtilityContent.Buffs {
 
 			player.immune = true;
 
-			Timers.SetTimer( "ModHelpersGodMode_P_" + player.whoAmI, 1, false, () => {
+			Timers.SetTimer( "ModLibsGodMode_P_" + player.whoAmI, 1, false, () => {
 				player.immune = false;
 				return true;
 			} );
@@ -84,7 +84,7 @@ namespace ModLibsUtilityContent.Buffs {
 			//npc.immortal = true;
 			npc.dontTakeDamage = true;
 
-			Timers.SetTimer( "ModHelpersGodMode_N_" + npc.whoAmI, 1, false, () => {
+			Timers.SetTimer( "ModLibsGodMode_N_" + npc.whoAmI, 1, false, () => {
 				//npc.immortal = false;
 				npc.dontTakeDamage = false;
 				return true;
