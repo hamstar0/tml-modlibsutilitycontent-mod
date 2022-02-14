@@ -1,1 +1,4 @@
 Supplies assorted game content (NPCs, tiles, etc.) for (reusable) utility purposes.
+
+Credits:
+	koolaidlemonade - Vanilla cyborg tile
