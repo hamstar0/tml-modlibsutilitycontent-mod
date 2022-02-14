@@ -17,6 +17,17 @@ namespace ModLibsUtilityContent.Buffs {
 
 		////////////////
 
+		/// @private
+		public override bool Autoload( ref string name, ref string texture ) {
+			texture = ModLibsUtilityContentMod.Instance.Name + "/Buffs/DegreelessnessBuff";
+
+			return base.Autoload( ref name, ref texture );
+		}
+
+
+
+		////////////////
+
 		/// <summary>
 		/// Shows the typical animation effect of invulnerable entities.
 		/// </summary>

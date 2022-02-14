@@ -6,6 +6,14 @@ using Terraria.ObjectData;
 
 namespace ModLibsUtilityContent.Tiles {
 	public class FallenCyborgTile : ModTile {
+		/// @private
+		public override bool Autoload( ref string name, ref string texture ) {
+			texture = ModLibsUtilityContentMod.Instance.Name + "/Tiles/FallenCyborgTile";
+
+			return base.Autoload( ref name, ref texture );
+		}
+
+		/// @private
 		public override void SetDefaults() {
 			Main.tileLighted[ this.Type ] = true;
 			Main.tileFrameImportant[ this.Type ] = true;
@@ -26,6 +34,7 @@ namespace ModLibsUtilityContent.Tiles {
 		}
 
 
+		/// @private
 		public override void NumDust( int i, int j, bool fail, ref int num ) {
 			num = fail ? 1 : 3;
 		}

@@ -10,6 +10,13 @@ namespace ModLibsUtilityContent.Tiles {
 	/// </summary>
 	public class CoalTile : ModTile {
 		/// @private
+		public override bool Autoload( ref string name, ref string texture ) {
+			texture = ModLibsUtilityContentMod.Instance.Name + "/Tiles/CoalTile";
+
+			return base.Autoload( ref name, ref texture );
+		}
+
+		/// @private
 		public override void SetDefaults() {
 			Main.tileSolid[Type] = true;
 			Main.tileMergeDirt[Type] = true;

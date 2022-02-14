@@ -16,7 +16,7 @@ namespace ModLibsUtilityContent.NPCs {
 		/// <summary></summary>
 		public override string Texture => this._Texture;
 
-		private string _Texture = "ModLibsUtilityContent/NPCs/PropNPC";
+		private string _Texture = ModLibsUtilityContentMod.Instance.Name+"/NPCs/PropNPC";
 
 
 
