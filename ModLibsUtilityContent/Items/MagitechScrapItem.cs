@@ -8,8 +8,6 @@ using Terraria.ModLoader;
 namespace ModLibsUtilityContent.Items {
 	/// <summary></summary>
 	public partial class MagitechScrapItem : ModItem {
-		public delegate void SetStaticDefaults_Deleg( MagitechScrapItem myitem );
-
 		public delegate void SetDefaults_Deleg( MagitechScrapItem myitem );
 
 		public delegate void ModifyTooltips_Deleg( MagitechScrapItem myitem, List<TooltipLine> tooltips );
@@ -19,8 +17,6 @@ namespace ModLibsUtilityContent.Items {
 
 
 		////////////////
-
-		public SetStaticDefaults_Deleg SetStaticDefaults_Hook;
 
 		public SetDefaults_Deleg SetDefaults_Hook;
 
@@ -38,16 +34,6 @@ namespace ModLibsUtilityContent.Items {
 
 
 		////////////////
-
-		/// @private
-		public override void SetStaticDefaults() {
-			this.DisplayName.SetDefault( "Magitech Scrap" );
-			this.Tooltip.SetDefault( "Assorted machine parts with assorted enchantments" );
-
-			//
-
-			this.SetStaticDefaults_Hook?.Invoke( this );
-		}
 
 		/// @private
 		public override void SetDefaults() {
