@@ -60,11 +60,15 @@ namespace ModLibsUtilityContent.Tiles {
 		////////////////
 
 		public override void KillMultiTile( int i, int j, int frameX, int frameY ) {
-			this.KillMultiTile_Hook?.Invoke( i, j, frameX, frameY );
+			var myitem = ModContent.GetInstance<FallenCyborgTile>();
+
+			myitem.KillMultiTile_Hook?.Invoke( i, j, frameX, frameY );
 		}
 
 		public override void MouseOverFar( int i, int j ) {
-			this.MouseOverFar_Hook?.Invoke( i, j );
+			var myitem = ModContent.GetInstance<FallenCyborgTile>();
+
+			myitem.MouseOverFar_Hook?.Invoke( i, j );
 		}
 	}
 }

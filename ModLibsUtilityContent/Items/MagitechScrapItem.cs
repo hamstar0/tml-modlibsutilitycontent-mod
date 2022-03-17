@@ -47,17 +47,23 @@ namespace ModLibsUtilityContent.Items {
 
 			//
 
-			this.SetDefaults_Hook?.Invoke( this );
+			var myitem = ModContent.GetInstance<MagitechScrapItem>();
+
+			myitem.SetDefaults_Hook?.Invoke( this );
 		}
 
 		////
 
 		public override void ModifyTooltips( List<TooltipLine> tooltips ) {
-			this.ModifyTooltips_Hook?.Invoke( this, tooltips );
+			var myitem = ModContent.GetInstance<MagitechScrapItem>();
+
+			myitem.ModifyTooltips_Hook?.Invoke( this, tooltips );
 		}
 
 		public override bool CanRightClick() {
-			return this.CanRightClick_Hook?.Invoke( this ) ?? false;
+			var myitem = ModContent.GetInstance<MagitechScrapItem>();
+
+			return myitem.CanRightClick_Hook?.Invoke( this ) ?? false;
 		}
 	}
 }
