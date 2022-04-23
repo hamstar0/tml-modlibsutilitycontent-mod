@@ -9,10 +9,71 @@ using ModLibsGeneral.Libraries.UI;
 
 
 namespace ModLibsUtilityContent.NPCs {
+	public enum PropType {
+		None = -1,
+		Item,
+		NPC,
+		Projectile,
+		//Gore,
+		//Buff,
+		//Cloud,
+		//Extra
+	}
+
+
+
 	/// <summary>
 	/// Implements an NPC able to have its texture and size adjusted dynamically. Is completely passive.
 	/// </summary>
 	public class PropNPC : ModNPC {
+		public static int Create( PropType type, int thingId, Vector2 position ) {
+			string texture = "";
+
+			switch( type ) {
+			case PropType.Item:
+				texture = "Terraria/Item_"+thingId;
+				break;
+			case PropType.NPC:
+				texture = "Terraria/Npc_"+thingId;
+				break;
+			case PropType.Projectile:
+				texture = "Terraria/Projectile_"+thingId;
+				break;
+			/*case PropType.Gore:
+				texture = "Terraria/Gore_"+thingId;
+				break;
+			case PropType.Buff:
+				texture = "Terraria/Buff_"+thingId;
+				break;
+			case PropType.Cloud:
+				texture = "Terraria/Cloud_"+thingId;
+				break;
+			case PropType.Extra:
+				texture = "Terraria/Extra_"+thingId;
+				break;*/
+			}
+
+			int npcWho = NPC.NewNPC(
+				X: (int)position.X,
+				Y: (int)position.Y,
+				Type: thingId
+			);
+			if( npcWho < 0 ) {
+				return npcWho;
+			}
+
+			//
+
+			var mynpc = Main.npc[npcWho].modNPC as PropNPC;
+			mynpc.SetTexture( texture );
+
+			return npcWho;
+		}
+
+
+
+		////////////////
+
 		/// <summary></summary>
 		public override string Texture => this._Texture;
 
@@ -21,7 +82,7 @@ namespace ModLibsUtilityContent.NPCs {
 
 
 		////////////////
-
+		
 		/// @private
 		public override void SetStaticDefaults() {
 			this.DisplayName.SetDefault( "A Prop" );
@@ -103,6 +164,8 @@ namespace ModLibsUtilityContent.NPCs {
 				layerDepth: 0f
 			);
 
+			//
+
 			if( ModLibsUtilityContentConfig.Instance.DebugModeInfo ) {
 				var rect = new Rectangle(
 					(int)( pos.X - ((npc.scale * (float)tex.Width) / 2f) ),
@@ -112,6 +175,8 @@ namespace ModLibsUtilityContent.NPCs {
 				);
 				DrawLibraries.DrawBorderedRect( sb, Color.Transparent, Color.Red, rect, 2 );
 			}
+
+			//
 
 			return false;
 		}

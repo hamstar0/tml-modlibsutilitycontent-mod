@@ -1,6 +1,6 @@
 displayName = Mod Libs - Utility Content
 author = hamstar
-version = 1.1.1
+version = 1.2.0
 modReferences = ModLibsCore@1.0.0, ModLibsGeneral@1.0.0
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
 homepage = https://forums.terraria.org/index.php?threads/mod-libs.111593/
