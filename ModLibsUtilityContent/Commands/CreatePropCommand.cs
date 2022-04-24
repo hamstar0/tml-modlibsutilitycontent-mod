@@ -130,11 +130,8 @@ namespace ModLibsUtilityContent.Commands {
 
 			//
 
-			Player plr = caller.Player;
-			int x = (int)plr.position.X + (plr.direction * 16 * 16);
-			int y = (int)plr.position.Y;
-
-			PropNPC.Create( propType, propSubType, new Vector2( x, y ) );
+			int npcWho = PropNPC.Create( propType, propSubType, Main.MouseWorld );
+			Main.npc[npcWho].direction = caller.Player.direction;
 
 			//
 
