@@ -14,38 +14,27 @@ namespace ModLibsUtilityContent.Commands {
 					string[] args,
 					out PropType propType,
 					out int propSubType,
+					out int frame,
 					out string result ) {
 			if( args.Length != 3 ) {
 				propType = PropType.None;
 				propSubType = -1;
+				frame = 0;
 				result = "Invalid number of arguments.";
 				return false;
 			}
 
 			//
 
-			if( !int.TryParse(args[1], out int propTypeRaw) ) {
+			if( !int.TryParse(args[0], out int propTypeRaw) ) {
 				propType = PropType.None;
 				propSubType = -1;
+				frame = 0;
 				result = "Invalid type argument.";
-				return false;
-			}
-			if( propTypeRaw < 0 || propTypeRaw > 6 ) {
-				propType = PropType.None;
-				propSubType = -1;
-				result = "Type argument out of range.";
 				return false;
 			}
 
 			propType = (PropType)propTypeRaw;
-
-			//
-
-			if( !int.TryParse(args[2], out propSubType) ) {
-				propSubType = -1;
-				result = "Invalid sub type argument.";
-				return false;
-			}
 
 			//
 
@@ -73,10 +62,34 @@ namespace ModLibsUtilityContent.Commands {
 			case PropType.Extra:
 				maxSubType = ItemLoader.ItemCount;
 				break;*/
+			default:
+				propType = PropType.None;
+				propSubType = -1;
+				frame = 0;
+				result = "Type argument out of range.";
+				return false;
 			}
 
-			if( propSubType < 0 || propTypeRaw > 6 ) {
+			//
+
+			if( !int.TryParse(args[1], out propSubType) ) {
+				propSubType = -1;
+				frame = 0;
+				result = "Invalid sub type argument.";
+				return false;
+			}
+
+			if( propSubType < 0 || propTypeRaw >= maxSubType ) {
+				frame = 0;
 				result = "Sub type argument out of range.";
+				return false;
+			}
+
+			//
+
+			if( !int.TryParse(args[2], out frame) ) {
+				frame = 0;
+				result = "Invalid frame argument.";
 				return false;
 			}
 
@@ -102,7 +115,7 @@ namespace ModLibsUtilityContent.Commands {
 		/// @private
 		public override string Command => "mluc-prop";
 		/// @private
-		public override string Usage => $"/{this.Command} <type> <sub type>";
+		public override string Usage => $"/{this.Command} <type> <sub type> <frame #>";
 		/// @private
 		public override string Description => "Spawns a prop. `type` indicates either item (0), npc (1), projectile (2)."
 			+" `sub type` indicates the entity type index.";    //gore (3), buff (4), cloud (5), extra (6)
@@ -121,16 +134,24 @@ namespace ModLibsUtilityContent.Commands {
 			//
 
 			PropType propType;
-			int propSubType;
+			int propSubType, frame;
 
-			if( !CreatePropCommand.ParseArguments(args, out propType, out propSubType, out string result) ) {
+			bool argsParsed = CreatePropCommand.ParseArguments(
+				args: args,
+				propType: out propType,
+				propSubType: out propSubType,
+				frame: out frame,
+				result: out string result
+			);
+
+			if( !argsParsed ) {
 				caller.Reply( result, Color.Yellow );
 				return;
 			}
 
 			//
 
-			int npcWho = PropNPC.Create( propType, propSubType, Main.MouseWorld );
+			int npcWho = PropNPC.Create( propType, propSubType, Main.MouseWorld, frame );
 			Main.npc[npcWho].direction = caller.Player.direction;
 
 			//
